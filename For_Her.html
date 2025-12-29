@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Message For You ✨</title>
+    <style>
+        :root {
+            --primary: #ff477e;
+            --secondary: #9b59b6;
+            --bg: #fff0f3;
+            --text-color: #4a4a4a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #fff0f3 0%, #f3e5f5 100%);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            touch-action: manipulation;
+        }
+
+        /* Floating Circles Background */
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            opacity: 0.1;
+            z-index: 1;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-1000px) rotate(360deg); }
+        }
+
+        /* Main Card */
+        .card {
+            width: 90%;
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px 25px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .avatar-circle {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: -80px auto 20px;
+            box-shadow: 0 10px 20px rgba(255, 71, 126, 0.2);
+            font-size: 35px;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        p {
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .btn-powerup {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(155, 89, 182, 0.3);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .btn-powerup:active {
+            transform: scale(0.95);
+        }
+
+        /* Perks Section */
+        #perksBox {
+            display: none;
+            margin-top: 25px;
+            text-align: left;
+            background: #fdf2f7;
+            padding: 20px;
+            border-radius: 15px;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .perk-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .tick { color: #2ecc71; margin-right: 12px; font-size: 18px; }
+
+        /* Falling Hearts */
+        .heart-fall {
+            position: absolute;
+            color: var(--primary);
+            font-size: 20px;
+            pointer-events: none;
+            z-index: 100;
+            animation: fall 3s linear forwards;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="circle" style="width:100px; height:100px; left:10%; top:20%;"></div>
+    <div class="circle" style="width:150px; height:150px; right:5%; top:10%;"></div>
+    <div class="circle" style="width:80px; height:80px; left:20%; bottom:10%;"></div>
+
+    <div class="card">
+        <div class="avatar-circle">🌟</div>
+        <h2>Hey Super Bestie! ✨</h2>
+        <p>I know some days feel like a puzzle with missing pieces. But remember, <b>you're the artist of your own story.</b></p>
+        <p>Your strength is magnetic! Don't let today dim your light. You are truly amazing just the way you are.</p>
+        
+        <button class="btn-powerup" id="powerBtn" onclick="activatePower()">Click for a Power-up! ✨</button>
+
+        <div id="perksBox">
+            <div class="perk-item"><span class="tick">✔</span> <b>Your Best Friend's Support:</b> Always here.</div>
+            <div class="perk-item"><span class="tick">✔</span> <b>Loyalty:</b> 100% Guaranteed.</div>
+            <div class="perk-item"><span class="tick">✔</span> <b>Future:</b> Bright & Cheater-free.</div>
+            <div class="perk-item"><span class="tick">✔</span> <b>Today's Mission:</b> Go grab a Chai/Coffee!</div>
+            <p style="font-size: 12px; color: #888; margin-top: 10px; text-align: center;">Distance means nothing when friendship means everything.</p>
+        </div>
+    </div>
+
+    <script>
+        function activatePower() {
+            const perks = document.getElementById('perksBox');
+            const btn = document.getElementById('powerBtn');
+            
+            // Show the perks
+            perks.style.display = 'block';
+            btn.style.opacity = '0.5';
+            btn.innerText = "Power Activated! 🔥";
+            btn.disabled = true;
+
+            // Start falling hearts
+            for(let i=0; i<40; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart-fall';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = (Math.random() * 15 + 15) + 'px';
+            heart.style.opacity = Math.random();
+            heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
